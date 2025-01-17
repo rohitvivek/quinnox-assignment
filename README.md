@@ -2,6 +2,10 @@
 
 ## Getting Started
 
+### Problem Statement
+You’re working at an online retail platform. Every time a customer places an order, an event
+is published to an SQS queue. As a data engineer, you need to build a small data pipeline
+
 ### 1. Clone the Repository
 To begin, clone the repository to your local machine:
 
