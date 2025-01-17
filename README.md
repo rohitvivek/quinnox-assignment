@@ -43,5 +43,12 @@ Verify functionality by testing the following API endpoints:
   ```
 
 ### 6. Block Diagram
+![image](https://github.com/user-attachments/assets/68ae9217-2f48-4867-8ac8-4b0c4fab7135)
+
+Description of the Flow
+(1) SQS to Consumer: Messages are published to the SQS queue, and the Python-based SQS consumer reads and processes them.
+(2) Consumer to Redis: Validated and aggregated data is stored in Redis for user-specific and global statistics.
+(3) Redis Interaction: Redis serves as the data cache, interacting with the consumer and API.
+(4) FastAPI and User: The FastAPI service exposes REST endpoints to retrieve data from Redis for users and global statistics.
 
 
