@@ -42,14 +42,6 @@ Verify functionality by testing the following API endpoints:
   curl http://localhost:8000/stats/global
   ```
 
-### 6. Publish the Assignment on GitHub
-To complete the assignment:
+### 6. Block Diagram
 
-1. Ensure the repository is public and includes:
-   - Full source code.
-   - `docker-compose.yml`.
-   - Scripts for populating the SQS queue.
-   - This detailed `README.md` file.
-
-2. Share the repository link in your assignment reply email.
 
