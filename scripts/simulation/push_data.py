@@ -40,17 +40,26 @@ orders = [
       {
         "order_id": "ORD1236",
         "user_id": "U1233",
-        "order_value": 49.99,
+        "order_value": 59.99,
         "items": [
             {"product_id": "P003", "quantity": 1, "price_per_unit": 49.99},
         ],
         "shipping_address": "MF 17 BTM",
         "payment_method": "CreditCard"
     },
+      {
+        "user_id": "U1232",
+        "order_value": 59.99,
+        "items": [
+            {"product_id": "P003", "quantity": 1, "price_per_unit": 49.99},
+        ],
+        "shipping_address": "Bommanahalli",
+        "payment_method": "DebitCard"
+    }
 ]
 
 # Populate the queue
 for order in orders:
     sqs_client.send_message(QueueUrl=queue_url, MessageBody=json.dumps(order))
-    print(f"Sent order to SQS: {order['order_id']}")
+    print(f"Sent order to SQS: {order.get('order_id')}")
 

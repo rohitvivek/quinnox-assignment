@@ -1,0 +1,9 @@
+{
+  "access_key": "dummy",
+  "secret_key": "dummy",
+  "sqs_endpoint_url":"http://localstack:4566/",
+  "redis_host":"redis",
+  "sqs_queue_name": "order-events",
+  "sqs_region_name": "us-east-1",
+  "redis_port": 6379
+}
