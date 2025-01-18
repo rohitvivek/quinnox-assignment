@@ -7,6 +7,7 @@ from etl_testing import Logger
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 
+
 class Test:
     def __init__(self, queue_url, sqs_client, redis_client):
         self.redis_client = redis_client
@@ -42,12 +43,15 @@ class Test:
             # check required fields are present/not
             assert all(k in order for k in ["user_id", "order_id", "order_value", "items"])
 
+            # type casting
+            order['order_value'] = None if order.get('order_value') is None else float(order.get('order_value'))
+        
             # check that order_value equals the sum of (quantity * price_per_unit)
             total_calculated = sum(
                 item["quantity"] * item["price_per_unit"] for item in order["items"]
             )
             # Validate & corrects the order_value
-            if abs(total_calculated - order.get("order_value")) > 0.01:
+            if total_calculated != order.get("order_value"):
                 order['order_value'] = total_calculated
             return True
 
@@ -77,7 +81,6 @@ class Test:
         order_date = datetime.strptime(order['order_timestamp'], "%Y-%m-%dT%H:%M:%SZ")
         dt = f"{order_date.year}:{order_date.month:02d}"
 
-
         # User-level monthly stats
         user_date_key = f"{user_key}:{dt}"
         logger.log(f"{user_date_key}", level=logger.DEBUG, exception=True)
@@ -105,6 +108,6 @@ if __name__ == "__main__":
     queue_url = sqs_client.create_queue(QueueName=local_stack_queue)["QueueUrl"]
     etl_test = Test(queue_url, sqs_client, redis_client)
 
-    sched=BlockingScheduler()
-    sched.add_job(etl_test.get_data,"interval",seconds=3)
+    sched = BlockingScheduler()
+    sched.add_job(etl_test.get_data, "interval", seconds=3)
     sched.start()
