@@ -5,6 +5,7 @@ from botocore.config import Config
 import config
 from etl_testing import Logger
 from datetime import datetime
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 class Test:
     def __init__(self, queue_url, sqs_client, redis_client):
@@ -104,5 +105,6 @@ if __name__ == "__main__":
     queue_url = sqs_client.create_queue(QueueName=local_stack_queue)["QueueUrl"]
     etl_test = Test(queue_url, sqs_client, redis_client)
 
-    while True:
-        etl_test.get_data()
+    sched=BlockingScheduler()
+    sched.add_job(etl_test.get_data,"interval",seconds=3)
+    sched.start()
