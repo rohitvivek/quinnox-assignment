@@ -1,20 +1,3 @@
-import boto3
-import json
-
-# Configure the SQS client with Localstack endpoint and dummy credentials
-sqs_client = boto3.client(
-    "sqs",
-    endpoint_url="http://localhost:4566/",  
-    region_name="us-east-1",               
-    aws_access_key_id="quinnox",           
-    aws_secret_access_key="rohit"        
-)
-
-# Fetch or create the queue
-queue_name = "order-events"
-queue_url = sqs_client.create_queue(QueueName=queue_name)["QueueUrl"]
-
-# Sample orders
 orders = [
     {
         "order_id": "ORD1234",
@@ -72,9 +55,3 @@ orders = [
         "order_timestamp": "2025-01-02T10:02:00Z"
     }
 ]
-
-# Populate the queue
-for order in orders:
-    sqs_client.send_message(QueueUrl=queue_url, MessageBody=json.dumps(order))
-    print(f"Sent order to SQS: {order.get('order_id')}")
-

@@ -1,6 +1,6 @@
 {
-  "access_key": "dummy",
-  "secret_key": "dummy",
+  "access_key": "quinnox",
+  "secret_key": "rohit",
   "sqs_endpoint_url":"http://localstack:4566/",
   "redis_host":"redis",
   "sqs_queue_name": "order-events",
