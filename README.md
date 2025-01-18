@@ -46,6 +46,12 @@ Verify functionality by testing the following API endpoints:
   curl http://localhost:8000/stats/global
   ```
 
+- **Monthly Stats Endpoint:**
+
+  ```bash
+  curl "http://localhost:8000/users/U1233/monthly_stats?year=2025&month=01"
+  ```
+
 ### 6. Block Diagram
 ![image](https://github.com/user-attachments/assets/68ae9217-2f48-4867-8ac8-4b0c4fab7135)
 
